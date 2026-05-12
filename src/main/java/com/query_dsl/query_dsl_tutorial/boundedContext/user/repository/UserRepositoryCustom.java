@@ -10,11 +10,11 @@ public interface UserRepositoryCustom {
 
     SiteUser getQslUser(Long id);
 
-    long getQslCount();
+    Long getQslCount();
 
     SiteUser getQslOldestUser();
 
-    List<SiteUser> getQslOldAscUsers();
+    List<SiteUser> getQslUsersOrderByAsc();
 
     List<SiteUser> searchQslUsers(String keyword);
 

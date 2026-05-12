@@ -1,8 +1,5 @@
 package com.query_dsl.query_dsl_tutorial.boundedContext.user.repository;
 
-import com.query_dsl.query_dsl_tutorial.boundedContext.interestKeyword.InterestKeyword;
-import com.query_dsl.query_dsl_tutorial.boundedContext.interestKeyword.QInterestKeyword;
-import com.query_dsl.query_dsl_tutorial.boundedContext.user.entity.QSiteUser;
 import com.query_dsl.query_dsl_tutorial.boundedContext.user.entity.SiteUser;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
@@ -36,7 +33,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
         * where id = 1;
         * */
 
-        QSiteUser siteUser = QSiteUser.siteUser;
+        // QSiteUser siteUser = QSiteUser.siteUser;
         // queryFactory
         //   .select(siteUser) select *
         //   .from(siteUser); from site_user
@@ -46,32 +43,30 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
                 .where(siteUser.id.eq(id)) // where id = 1
                 .fetchOne(); // 단일 결과 반환
     }
-
+    // 모든 회원의 수 반환
     @Override
-    public long getQslCount() {
-        QSiteUser siteUser = QSiteUser.siteUser;
-
+    public Long getQslCount() {
+        /*
+        SELECT COUNT(*)
+        FROM site_user
+        */
         return queryFactory
-                .select(siteUser.count())
+                .select(siteUser.count()) // siteUser의 갯수 구하기
                 .from(siteUser)
                 .fetchOne();
     }
-
+    // 가장 오래된 회원 한명 반환
     @Override
     public SiteUser getQslOldestUser() {
-        QSiteUser siteUser = QSiteUser.siteUser;
-
         return queryFactory
                 .selectFrom(siteUser)
-                .orderBy(siteUser.id.asc())
-                .limit(1)
+                .orderBy(siteUser.id.asc()) // id를 기준으로 오름차순 정렬
+                .limit(1) // 결과에서 첫번째 값을 가리킴
                 .fetchOne();
     }
-
+    // 오래된 회원 순으로 리스트 결과 반환
     @Override
-    public List<SiteUser> getQslOldAscUsers() {
-        QSiteUser siteUser = QSiteUser.siteUser;
-
+    public List<SiteUser> getQslUsersOrderByAsc() {
         return queryFactory
                 .selectFrom(siteUser)
                 .orderBy(siteUser.id.asc())
@@ -80,8 +75,6 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 
     @Override
     public List<SiteUser> searchQslUsers(String keyword) {
-        QSiteUser siteUser = QSiteUser.siteUser;
-
         return queryFactory
                 .selectFrom(siteUser)
                 .where(
@@ -93,8 +86,6 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 
     @Override
     public Page<SiteUser> searchQslUsers(String keyword, Pageable pageable) {
-        QSiteUser siteUser = QSiteUser.siteUser;
-
         // 검색 조건
         // BooleanExpression: 검색 조건을 처리하는 객체
         // containsIgnoreCase: 대소문자 구분 X

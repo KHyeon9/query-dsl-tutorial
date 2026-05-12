@@ -30,20 +30,15 @@ repositories {
 dependencies {
 	// Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-
 	// JPA
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-
 	// Devtool
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
 	// H2
 	runtimeOnly 'com.h2database:h2'
-
 	// QueryDSL
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
 	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta"
@@ -51,10 +46,8 @@ dependencies {
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 	// JPA 애노테이션 (@Entity, @id, @GeneratedValue 등)을 Jakarta 패키지로 제공하는 역할
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
-
 	// P6Spy
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
-
 	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

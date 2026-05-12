@@ -13,7 +13,7 @@ import java.util.Arrays;
 @Profile("test") // 이 클래스 안에 정의된 Bean들은 test 모드에서만 실행
 public class TestInitData {
 
-    // 앱 실행 직후 초기 데이터 셋팅 및 초기화
+    // CommandLineRunner : 앱 실행 직후 초기 데이터 셋팅 및 초기화
     @Bean
     CommandLineRunner init(UserRepository userRepository) {
         return args -> {
@@ -33,14 +33,12 @@ public class TestInitData {
             userRepository.saveAll(Arrays.asList(user1, user2));
             // 중간 테이블이 있을 때, 아래 값을 설정하고 save를 한번에 하면 중복값 저장으로 생각해 에러를 반환
             // 즉, 회원이 있어서 keyword 생성이 가능
-            
             user1.addInterestKeword("야구");
             user1.addInterestKeword("농구");
 
             user2.addInterestKeword("등산");
             user2.addInterestKeword("캠핑");
             user2.addInterestKeword("야구");
-
 
             userRepository.saveAll(Arrays.asList(user1, user2));
         };

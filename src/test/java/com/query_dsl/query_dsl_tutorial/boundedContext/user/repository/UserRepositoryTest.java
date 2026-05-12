@@ -75,6 +75,7 @@ class UserRepositoryTest {
     void allUserCount() {
         long count = userRepository.getQslCount();
 
+        assertThat(count).isGreaterThan(0);
         assertThat(count).isEqualTo(2);
     }
 
@@ -92,7 +93,7 @@ class UserRepositoryTest {
     @Test
     @DisplayName("전체 회원 오래된 순서로 조회")
     void oldUserFindAll() {
-        List<SiteUser> userList = userRepository.getQslOldAscUsers();
+        List<SiteUser> userList = userRepository.getQslUsersOrderByAsc();
 
         SiteUser user1 = userList.get(0);
 
